@@ -1,0 +1,16 @@
+<p-card>
+    <ng-template pTemplate="title">
+        {{lead.displayName}}
+    </ng-template>
+    <ng-template pTemplate="subtitle">
+        {{lead.accountType}}
+    </ng-template>
+    <ng-template pTemplate="content">
+        <div>
+            <img [src]="lead.avatarUrls['48x48']" alt="Avatar">
+            <p>Account ID: {{lead.accountId}}</p>
+            <p>Self: {{lead.self}}</p>
+            <p>Active: {{lead.active ? 'Yes' : 'No'}}</p>
+        </div>
+    </ng-template>
+</p-card>

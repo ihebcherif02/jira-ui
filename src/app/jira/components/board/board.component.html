@@ -1,0 +1,17 @@
+<p-card>
+    <div style="width:600px; height: 600px; gap: 20px;">
+        <div class="board-header">
+            <div class="board-title">
+                <div style="display: flex; flex-direction: column;">
+                    <label style="text-transform: uppercase;">{{board?.name ?? 'Board'}}</label>
+                </div> 
+            </div>
+        </div>
+        <div class="board-sprints">            
+            <h3><i class="pi pi-th-large"></i> Sprints</h3>
+            <div  class="sprint" *ngFor="let sprint of sprints" >
+                <label><a  class="link" [routerLink]="['/sprint', sprint.id]"> {{sprint.name}}</a></label>
+            </div>
+        </div>
+   </div>
+</p-card>

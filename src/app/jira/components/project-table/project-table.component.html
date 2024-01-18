@@ -1,0 +1,27 @@
+<p-card header="Projects">
+    <p-table [value]="projects" [tableStyle]="{ 'min-width': '50rem' }">
+      <ng-template pTemplate="header">
+        <tr>
+          <th></th>
+          <th>Title</th>
+          <th>Key</th>
+          <th>Type</th>
+          <th>Lead</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-project>
+        <tr class="table-row">
+          <td><img [src]="project.avatarUrls['16x16']"  style="height: 35px;"/></td>
+          <td><a class="link" [routerLink]="['/project', project.id]">{{project.name}}</a></td>
+          <td>{{project.key}}</td>
+          <td>Team-managed {{project.projectTypeKey}}</td>
+          <td>
+            <div style="display: flex; flex-direction: row; align-items: center; gap: 5px;">
+              <img [src]="project.lead.avatarUrls['16x16']" style="height: 35px;">
+              <p><a class="link" [routerLink]="['/lead',project.lead.accountId]">{{project.lead.displayName}}</a></p>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-card>

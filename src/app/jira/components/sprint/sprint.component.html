@@ -1,0 +1,112 @@
+<p-card>
+    <div style="width:100%; height: 800px; gap: 20px; overflow-y: auto;">
+        <div class="sprint-header">
+            <div class="sprint-title">
+                <div style="display: flex; flex-direction: column;">
+                    <label style="text-transform: uppercase;">{{sprint?.name}}</label>
+                </div> 
+            </div>
+        </div>
+        <div class="sprint-table">
+            <div class="sprint-column" pDroppable (onDrop)="drop('To Do')">
+                <h3>TO DO {{ToDo.length > 0 ? ToDo.length : ''}}</h3>
+                <div class="issue" *ngFor="let issue of ToDo" pDraggable (onDragStart)="dragStart(issue,'To Do')" (onDragEnd)="dragEnd()"
+                >
+                    <div class="issue-body">
+                        <div>
+                            <div class="issue-summary" *ngIf="editMode !== issue">
+                                <p class="issue-summary-content">{{sliceSummary(issue)}}</p>
+                                <div class="issue-summary-btn">
+                                    <i class="pi pi-pencil" style="font-size: 12px;" pTooltip="Edit Summary" tooltipPosition="bottom" (click)="editModee(issue)"></i>
+                                </div>
+                            </div>
+                            <div class="issue-summary-edit" *ngIf="editMode === issue">
+                                <div>
+                                    <input [(ngModel)]="issue.fields.summary" class="issue-summary-content-edit" (input)="handleInput(issue,$event)"/>
+                                </div>
+                                <div style="display: flex; flex-direction: row; align-items: center; justify-content: end; width: 100%;">
+                                    <div class="issue-summary-btn">
+                                        <i class="pi pi-check" style="font-size: 12px;" (click)="saveSummary()"></i>
+                                    </div>
+                                    <div class="issue-summary-btn">
+                                        <i class="pi pi-times" style="font-size: 12px;" (click)="stopEditing()"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <button class="issue-menu-btn">
+                                <span>
+                                    <i class="pi pi-ellipsis-h" style="font-size: 20px; color: rgb(39, 37, 37);"></i>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="issue-header" >
+                        <div class="issue-key">
+                            <img src="assets/images/checklist.png" alt="task" style="width: 24px; border-radius: 50%;">
+                            <label><a  class="link" [routerLink]="['/issue',issue.id]"> {{issue.key}} </a></label>
+                        </div>
+                        <div  class="issue-avatar">
+                            <img src="assets/images/user.png" alt="user" style="width: 28px; border-radius: 50%;" (click)="assignIssueToUser(issue.id,'hello')">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sprint-column" pDroppable (onDrop)="drop('In Progress')">
+                <h3>IN PROGRESS {{ InProgress.length > 0 ? InProgress.length : '' }}</h3>                
+                <div class="issue" *ngFor="let issue of InProgress" pDraggable (onDragStart)="dragStart(issue,'In Progress')" (onDragEnd)="dragEnd()"
+                >
+                    <div class="issue-body">
+                        <div class="issue-summary">
+                            <p>{{issue.fields.summary}}</p>
+                        </div>
+                        <div >
+                            <button class="issue-menu-btn">
+                                <span>
+                                    <i class="pi pi-ellipsis-h" style="font-size: 20px; color: rgb(39, 37, 37);"></i>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="issue-header" >
+                        <div class="issue-key">
+                            <img src="assets/images/checklist.png" alt="task" style="width: 24px; border-radius: 50%;">
+                            <label><a  class="link" [routerLink]="['/issue',issue.id]"> {{issue.key}} </a></label>
+                        </div>
+                        <div  class="issue-avatar">
+                            <img src="assets/images/user.png" alt="user" style="width: 28px; border-radius: 50%;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sprint-column" pDroppable (onDrop)="drop('Done')"> 
+                <h3>DONE {{Done.length > 0 ? Done.length : ''}}</h3>
+                <div class="issue" *ngFor="let issue of Done" pDraggable (onDragStart)="dragStart(issue, 'Done')" (onDragEnd)="dragEnd()"
+                >
+                    <div class="issue-body">
+                        <div class="issue-summary">
+                            <p>{{issue.fields.summary}}</p>
+                        </div>
+                        <div >
+                            <button class="issue-menu-btn">
+                                <span>
+                                    <i class="pi pi-ellipsis-h" style="font-size: 20px; color: rgb(39, 37, 37);"></i>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="issue-header" >
+                        <div class="issue-key">
+                            <img src="assets/images/checklist.png" alt="task" style="width: 24px; border-radius: 50%;">
+                            <label><a  class="link" [routerLink]="['/issue',issue.id]"> {{issue.key}} </a></label>
+                        </div>
+                        <div  class="issue-avatar">
+                            <img src="assets/images/user.png" alt="user" style="width: 28px; border-radius: 50%;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+   </div>
+</p-card>

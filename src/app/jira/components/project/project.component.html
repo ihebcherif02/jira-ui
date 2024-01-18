@@ -1,0 +1,24 @@
+<p-card>
+   <div style="width:600px; height: 600px; gap: 20px;">
+        <div class="project-header">
+            <div class="project-title">
+                <div>
+                    <img [src]="project.avatarUrls['48x48']" alt="Avatar" style="width: 60px; border-radius: 50%;">
+                </div>
+                <div style="display: flex; flex-direction: column;">
+                    <label style="text-transform: uppercase;">{{project.name}}</label>
+                    <label><label style="text-transform: capitalize;">{{project.projectTypeKey}}</label> project</label>
+                </div> 
+            </div>
+            <div class="project-lead">
+                <p>{{project.lead.displayName}}</p>
+            </div>
+        </div>
+        <div class="project-boards">            
+            <h3><i class="pi pi-th-large"></i> Boards</h3>
+            <div  class="board" *ngFor="let board of boards" >
+                <label><a  class="link" [routerLink]="['/board', board.id]"> {{board.name}}</a></label>
+            </div>
+        </div>
+   </div>
+</p-card>
